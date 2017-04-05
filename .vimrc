@@ -11,17 +11,18 @@ Plug 'othree/jspc.vim'
 Plug 'scrooloose/syntastic'
 Plug 'tomasr/molokai', { 'dir': '~/.vim/colors' }
 Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'Valloric/YouCompleteMe'
 Plug 'kien/ctrlp.vim'
 Plug 'vim-scripts/indentpython.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
+Plug 'mtscout6/syntastic-local-eslint.vim'
 
 call plug#end()
 
 "NERDTree
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+map <C-m> :NERDTreeToggle<CR>
 
 "Editor relative
 colorscheme molokai
@@ -37,18 +38,16 @@ nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
 
-au BufNewFile,BufRead *.js,*.html,*.css
-    \ set tabstop=2 |
+au BufNewFile,BufRead *.js,*.html,*.css,*.json
     \ set softtabstop=2 |
     \ set shiftwidth=2 |
     \ set textwidth=79 |
     \ set expandtab |
-    \ set autoindent |
+    \ set smartindent |
     \ set fileformat=unix
 
 "Python
 au BufNewFile,BufRead *.py
-    \ set tabstop=4 |
     \ set softtabstop=4 |
     \ set shiftwidth=4 |
     \ set textwidth=79 |
@@ -57,32 +56,27 @@ au BufNewFile,BufRead *.py
     \ set fileformat=unix
 
 
-au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 let g:ycm_autoclose_preview_window_after_completion=1
 
-"python with virtualenv support
-python3 << EOF
-import os
-import sys
-if 'VIRTUAL_ENV' in os.environ:
-  project_base_dir = os.environ['VIRTUAL_ENV']
-  activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-  execfile(activate_this, dict(__file__=activate_this))
-EOF
-
 let python_highlight_all=1
-let g:ycm_pythob_binary_path='/usr/bin/python3'
+let g:ycm_python_binary_path='/usr/bin/python2'
 
 "syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_javascript_checkers = ['eslint']
+let g:syntastic_javascript_eslint_exec = 'eslint_d'
 
 "closetag
 let g:closetag_filenames = "*.html,*.xhtml,*.php,*.jsp,*.jsf,*.js"
+
+" javascript libraries syntax
+let g:used_javascript_libs = 'jquery,lodash,react'
+
+" airline
+let g:airline_theme = 'molokai'
+
+" Ident file
+nnoremap <F7> gg=G:%s/\s\+$//e<CR>
