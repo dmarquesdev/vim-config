@@ -28,6 +28,7 @@ map <C-m> :NERDTreeToggle<CR>
 colorscheme molokai
 set nu
 set encoding=utf-8
+set guifont=Monospace\ 14
 
 "Ctrl+Space for completion
 inoremap <C-@> <C-p>
@@ -80,3 +81,12 @@ let g:airline_theme = 'molokai'
 
 " Ident file
 nnoremap <F7> gg=G:%s/\s\+$//e<CR>
+
+" JSX options
+let g:jsx_ext_required = 0
+
+" auto reload vimrc
+augroup reload_vimrc " {
+	autocmd!
+	autocmd BufWritePost $MYVIMRC source $MYVIMRC
+augroup END " }"
