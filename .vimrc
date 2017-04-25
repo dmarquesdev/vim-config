@@ -17,7 +17,7 @@ Plug 'kien/ctrlp.vim'
 Plug 'vim-scripts/indentpython.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug 'alvan/vim-closetag'
-Plug 'mtscout6/syntastic-local-eslint.vim'
+Plug 'dyegocosta/syntastic-local-eslint_d.vim'
 
 call plug#end()
 
@@ -29,6 +29,7 @@ colorscheme molokai
 set nu
 set encoding=utf-8
 set guifont=Monospace\ 14
+set linespace=5
 
 "Ctrl+Space for completion
 inoremap <C-@> <C-p>
